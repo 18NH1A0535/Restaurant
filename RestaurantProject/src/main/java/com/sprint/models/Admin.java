@@ -59,5 +59,5 @@ public class Admin {
 	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY)
 	//@JoinColumn(name = "booking_id")
 	private List<Booking> booking;
-	//admin controller
+	
 }

@@ -25,6 +25,7 @@ import com.sprint.repository.CustomerRepository;
 @Service
 public class CustomerImpl implements CustomerService{
 	
+	@Autowired
 	private BookingRepository bookingRepository;
 	
 	@Autowired
