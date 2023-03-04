@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.dto.TransactionDTO;
-//import com.sprint.exceptions.BookingNotFoundException;
 import com.sprint.exceptions.CustomerNotFoundException;
 import com.sprint.exceptions.InvalidCredentialsException;
 import com.sprint.exceptions.TransactionRecordNotFoundException;
@@ -113,14 +111,6 @@ public class AdminController {
 	    return transactionRepository.findTotalAmountSpentByCustomerIdBetweenDates(customerId, endDate,startDate);
 	  }
 	  
-//	  @GetMapping(value="/bookings")
-//	  public double getDiscounts(@RequestParam("customerId") Long customerId,Model model) throws CustomerNotFoundException {
-//	    
-//		  double discount;
-//		  discount=adminImpl.discountsForCustomers(customerId);
-//	      model.addAttribute("discount", discount);
-//	      return discount;
-//	    }
 	  
 	  //total money spent
 	  @GetMapping(value="/{id}")
@@ -129,13 +119,13 @@ public class AdminController {
 		  return adminImpl.calculateMoneySpent(customerId);
 	  }
 	  
-	   //to post transaction
-	  @PostMapping(value="/{bookingId}/transaction")
-	  public ResponseEntity postTransaction(@PathVariable("bookingId")long bookingId,@RequestBody TransactionDTO transaction)
-	  {
-	  TransactionDTO tr=this.transactionService.createRecord(bookingId,transaction);
-		  return new ResponseEntity(tr,HttpStatus.CREATED);
-	  }
+//	   //to post transaction
+//	  @PostMapping(value="/{bookingId}/transaction")
+//	  public ResponseEntity postTransaction(@PathVariable("bookingId")long bookingId,@RequestBody TransactionDTO transaction)
+//	  {
+//	  TransactionDTO tr=this.transactionService.createRecord(bookingId,transaction);
+//		  return new ResponseEntity(tr,HttpStatus.CREATED);
+//	  }
 	  
 	  @PostMapping(value="/restaurant")
 	  public ResponseEntity postRestaurant(@RequestBody Restaurant restaurant)

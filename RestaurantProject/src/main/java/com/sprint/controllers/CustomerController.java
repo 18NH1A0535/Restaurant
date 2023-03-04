@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sprint.dto.BookingDTO;
 import com.sprint.dto.CustomerDTO;
+import com.sprint.dto.TransactionDTO;
 import com.sprint.exceptions.BookingAlreadyExistsException;
 import com.sprint.exceptions.BookingNotFoundException;
 import com.sprint.exceptions.CustomerAlreadyExistsException;
@@ -28,6 +29,7 @@ import com.sprint.models.Customer;
 import com.sprint.repository.CustomerRepository;
 import com.sprint.service.BookingService;
 import com.sprint.service.CustomerService;
+import com.sprint.service.TransactionService;
 
 @RestController
 @RequestMapping("/customers")
@@ -40,6 +42,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	   TransactionService transactionService;
 	  
 		@Autowired
 	  public CustomerController(BookingService bookingService) {
@@ -63,6 +68,14 @@ public class CustomerController {
 			return bookingService.createBooking(custId,booking);
 		}
 	  
+		 //to post transaction
+		  @PostMapping(value="/{bookingId}/transaction")
+		  public ResponseEntity postTransaction(@PathVariable("bookingId")long bookingId,@RequestBody TransactionDTO transaction)
+		  {
+		  TransactionDTO tr=this.transactionService.createRecord(bookingId,transaction);
+			  return new ResponseEntity(tr,HttpStatus.CREATED);
+		  }
+		  
 	  @PutMapping(value="/bookings/{bookingId}")
 	  public ResponseEntity<Booking> updateBooking(@PathVariable Long bookingId, @RequestBody  LocalDate newDate) throws BookingNotFoundException{
 		   Booking updatedBooking = null;

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +34,7 @@ public class Restaurant {
 //)
 //	private List<Booking> booking;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "admin_id")
 	private Admin admin;
